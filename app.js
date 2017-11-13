@@ -8,6 +8,8 @@ var dummyController = require('./controllers/dummyController');
 
 var port = process.env.PORT || 3000;
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
