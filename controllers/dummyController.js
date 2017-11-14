@@ -20,9 +20,8 @@ module.exports = function(app) {
   });
 
   app.get('/ords/parceiros/dadosparceiros/rest/busca-parceiro/:parceiro', function(req, response) {
-    console.log(JSON.stringify(req.body));
     var bodyParceiro = req.params.parceiro;
-    
+    console.log(JSON.stringify(bodyParceiro));
     var options = {
       host: '129.144.158.159',
       port: 443,
@@ -41,9 +40,9 @@ module.exports = function(app) {
   });
 
   app.get('/ords/parceiros/dadosparceiros/rest/busca-parceiro/:parceiro', function(req, responseParceiros) {
-    console.log(JSON.stringify(req.body));
     
     var bodyParceiro = req.params.parceiro;
+    console.log(bodyParceiro)
     var status = 0;
     
     var options = {
