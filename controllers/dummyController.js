@@ -1,7 +1,7 @@
 module.exports = function(app) {
 
   var https = require('https');
-  var responseApex = ''
+  var queryResponse = '';
   var response = {
     dummy: {
       codResponse: "ok"
@@ -20,8 +20,9 @@ module.exports = function(app) {
   });
 
   app.get('/ords/parceiros/dadosparceiros/rest/busca-parceiro/:parceiro', function(req, response) {
+  	
     var bodyParceiro = req.params.parceiro;
-    console.log(JSON.stringify(bodyParceiro));
+    
     var options = {
       host: '129.144.158.159',
       port: 443,
@@ -30,15 +31,20 @@ module.exports = function(app) {
     };
 
     var req = https.request(options, function(res) {
+      var body = '';
       res.on('data', function(chunk) {
-        responseApex = responseApex +  chunk;
+        body +=  chunk;
       });
+      res.on('end', function(){
+        queryResponse = JSON.parse(body);
+        console.log("Got a response: ", queryResponse);
+     });
     });
     req.end();
-
-    response.send(responseApex)
+    response.setHeader('Content-type', 'application/json');
+    response.send(queryResponse);
   });
-
+ 
   app.get('/ords/parceiros/dadosparceiros/rest/registro-utilizado/:parceiro', function(req, responseParceiros) {
     
     var bodyParceiro = req.params.parceiro;
@@ -53,10 +59,7 @@ module.exports = function(app) {
     };
 
     var req = https.request(options, function(res) {
-      res.on('data', function(chunk) {
-        responseApex = responseApex +  chunk;
-        status = res.statusCode;
-      });
+      status = res.statusCode;
     });
     req.end();
     if(status == 200){
