@@ -19,28 +19,51 @@ module.exports = function(app) {
     res.send(response);
   });
 
-  app.get('/amilDummy/apex', function(req, response) {
+  app.get('/ords/parceiros/dadosparceiros/rest/busca-parceiro/:parceiro', function(req, response) {
     console.log(JSON.stringify(req.body));
-
+    var bodyParceiro = req.params.parceiro;
+    
     var options = {
       host: '129.144.158.159',
       port: 443,
-      path: '/ords/parceiros/dadosparceiros/rest/busca-parceiro/Parceiro%20BLABLA91BLA92BLA93BLA94BLA95',
+      path: '/ords/parceiros/dadosparceiros/rest/busca-parceiro/Parceiro%20' + bodyParceiro,
       method: 'GET'
     };
 
     var req = https.request(options, function(res) {
-      console.log('STATUS: ' + res.statusCode);
-      console.log('HEADERS: ' + JSON.stringify(res.headers));
-      res.setEncoding('utf8');
       res.on('data', function(chunk) {
         responseApex = responseApex +  chunk;
       });
-      
-
     });
-
     req.end();
+
     response.send(responseApex)
   });
+
+  app.get('/ords/parceiros/dadosparceiros/rest/busca-parceiro/:parceiro', function(req, responseParceiros) {
+    console.log(JSON.stringify(req.body));
+    
+    var bodyParceiro = req.params.parceiro;
+    var status = 0;
+    
+    var options = {
+      host: '129.144.158.159',
+      port: 443,
+      path: '/ords/parceiros/dadosparceiros/rest/registro-utilizado/Parceiro%20' + bodyParceiro,
+      method: 'GET'
+    };
+
+    var req = https.request(options, function(res) {
+      res.on('data', function(chunk) {
+        responseApex = responseApex +  chunk;
+        status = res.statusCode;
+      });
+    });
+    req.end();
+    if(status == 200){
+    	responseParceiros.send(response);
+    }else{
+    	responseParceiros.send(response);
+    }
+   });
 };
