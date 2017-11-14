@@ -39,7 +39,7 @@ module.exports = function(app) {
     response.send(responseApex)
   });
 
-  app.get('/ords/parceiros/dadosparceiros/rest/busca-parceiro/:parceiro', function(req, responseParceiros) {
+  app.get('/ords/parceiros/dadosparceiros/rest/registro-utilizado/:parceiro', function(req, responseParceiros) {
     
     var bodyParceiro = req.params.parceiro;
     console.log(bodyParceiro)
