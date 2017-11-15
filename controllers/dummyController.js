@@ -26,7 +26,7 @@ module.exports = function(app) {
     var options = {
       host: '129.144.158.159',
       port: 443,
-      path: '/ords/parceiros/dadosparceiros/rest/busca-parceiro/Parceiro%20' + bodyParceiro,
+      path: '/ords/parceiros/dadosparceiros/rest/busca-parceiro/' + bodyParceiro,
       method: 'GET'
     };
 
@@ -48,13 +48,14 @@ module.exports = function(app) {
   app.get('/ords/parceiros/dadosparceiros/rest/registro-utilizado/:parceiro', function(req, responseParceiros) {
     
     var bodyParceiro = req.params.parceiro;
+
     console.log(bodyParceiro)
     var status = 0;
     
     var options = {
       host: '129.144.158.159',
       port: 443,
-      path: '/ords/parceiros/dadosparceiros/rest/registro-utilizado/Parceiro%20' + bodyParceiro,
+      path: '/ords/parceiros/dadosparceiros/rest/registro-utilizado/' + bodyParceiro,
       method: 'GET'
     };
 
