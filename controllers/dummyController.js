@@ -47,10 +47,7 @@ module.exports = function(app) {
  
   app.get('/ords/parceiros/dadosparceiros/rest/registro-utilizado/:id/proposta/:proposta/identificador/:identificador/nome/:nome/data-venda/:data/forma-pagamento/:pagamento', function(req, responseParceiros) {
 
-    
-    req.params.parceiro;
-
-    console.log(bodyParceiro)
+    console.log(req.params)
     var status = 0;
     
     var options = {
