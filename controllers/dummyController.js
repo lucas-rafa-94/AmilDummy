@@ -45,9 +45,10 @@ module.exports = function(app) {
     response.send(queryResponse);
   });
  
-  app.get('/ords/parceiros/dadosparceiros/rest/registro-utilizado/:parceiro', function(req, responseParceiros) {
+  app.get('/ords/parceiros/dadosparceiros/rest/registro-utilizado/:id/proposta/:proposta/identificador/:identificador/nome/:nome/data-venda/:data/forma-pagamento/:pagamento', function(req, responseParceiros) {
+
     
-    var bodyParceiro = req.params.parceiro;
+    req.params.parceiro;
 
     console.log(bodyParceiro)
     var status = 0;
@@ -55,7 +56,7 @@ module.exports = function(app) {
     var options = {
       host: '129.144.158.159',
       port: 443,
-      path: '/ords/parceiros/dadosparceiros/rest/registro-utilizado/' + bodyParceiro,
+      path: '/ords/parceiros/dadosparceiros/rest/registro-utilizado/'+req.params.id+'/proposta/'+req.params.proposta+'/identificador/'+req.params.identificador+'/nome/'+req.params.nome+'/data-venda/'+req.params.data+'/forma-pagamento/'+req.params.pagamento,
       method: 'GET'
     };
 
