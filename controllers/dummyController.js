@@ -21,7 +21,9 @@ module.exports = function(app) {
 
   app.get('/ords/parceiros/dadosparceiros/rest/busca-parceiro/:parceiro', function(req, response) {
   	
-    var bodyParceiro = req.params.parceiro;
+    var bodyParceiro = "";
+    
+    bodyParceiro = req.params.parceiro;
     
     var options = {
       host: '129.144.158.159',
