@@ -20,7 +20,7 @@ module.exports = function(app) {
   });
 
   app.get('/ords/parceiros/dadosparceiros/rest/busca-parceiro/:parceiro', function(req, response) {
-  	
+  	console.log(req.params.parceiro);
     var bodyParceiro = "";
     
     bodyParceiro = req.params.parceiro;
@@ -40,11 +40,12 @@ module.exports = function(app) {
       res.on('end', function(){
         queryResponse = JSON.parse(body);
         console.log("Got a response: ", queryResponse);
+        response.setHeader('Content-type', 'application/json');
+        response.send(queryResponse); 
      });
     });
     req.end();
-    response.setHeader('Content-type', 'application/json');
-    response.send(queryResponse);
+    
   });
  
   app.get('/ords/parceiros/dadosparceiros/rest/registro-utilizado/:id/proposta/:proposta/identificador/:identificador/nome/:nome/data-venda/:data/forma-pagamento/:pagamento', function(req, responseParceiros) {
